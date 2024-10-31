@@ -1,0 +1,388 @@
+<?php
+/**
+ * Astra functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Astra
+ * @since 1.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+/**
+ * Define Constants
+ */
+define( 'ASTRA_THEME_VERSION', '4.8.3' );
+define( 'ASTRA_THEME_SETTINGS', 'astra-settings' );
+define( 'ASTRA_THEME_DIR', trailingslashit( get_template_directory() ) );
+define( 'ASTRA_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
+
+/**
+ * Minimum Version requirement of the Astra Pro addon.
+ * This constant will be used to display the notice asking user to update the Astra addon to the version defined below.
+ */
+define( 'ASTRA_EXT_MIN_VER', '4.8.2' );
+
+/**
+ * Setup helper functions of Astra.
+ */
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-theme-options.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-theme-strings.php';
+require_once ASTRA_THEME_DIR . 'inc/core/common-functions.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-icons.php';
+
+define( 'ASTRA_PRO_UPGRADE_URL', astra_get_pro_url( 'https://wpastra.com/pricing/', 'dashboard', 'free-theme', 'dashboard' ) );
+define( 'ASTRA_PRO_CUSTOMIZER_UPGRADE_URL', astra_get_pro_url( 'https://wpastra.com/pricing/', 'customizer', 'free-theme', 'upgrade' ) );
+
+/**
+ * Update theme
+ */
+require_once ASTRA_THEME_DIR . 'inc/theme-update/astra-update-functions.php';
+require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-theme-background-updater.php';
+
+/**
+ * Fonts Files
+ */
+require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-font-families.php';
+if ( is_admin() ) {
+	require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts-data.php';
+}
+
+require_once ASTRA_THEME_DIR . 'inc/lib/webfont/class-astra-webfont-loader.php';
+require_once ASTRA_THEME_DIR . 'inc/lib/docs/class-astra-docs-loader.php';
+require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts.php';
+
+require_once ASTRA_THEME_DIR . 'inc/dynamic-css/custom-menu-old-header.php';
+require_once ASTRA_THEME_DIR . 'inc/dynamic-css/container-layouts.php';
+require_once ASTRA_THEME_DIR . 'inc/dynamic-css/astra-icons.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-walker-page.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-enqueue-scripts.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-gutenberg-editor-css.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-wp-editor-css.php';
+require_once ASTRA_THEME_DIR . 'inc/dynamic-css/block-editor-compatibility.php';
+require_once ASTRA_THEME_DIR . 'inc/dynamic-css/inline-on-mobile.php';
+require_once ASTRA_THEME_DIR . 'inc/dynamic-css/content-background.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-dynamic-css.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-global-palette.php';
+
+/**
+ * Custom template tags for this theme.
+ */
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-attr.php';
+require_once ASTRA_THEME_DIR . 'inc/template-tags.php';
+
+require_once ASTRA_THEME_DIR . 'inc/widgets.php';
+require_once ASTRA_THEME_DIR . 'inc/core/theme-hooks.php';
+require_once ASTRA_THEME_DIR . 'inc/admin-functions.php';
+require_once ASTRA_THEME_DIR . 'inc/core/sidebar-manager.php';
+
+/**
+ * Markup Functions
+ */
+require_once ASTRA_THEME_DIR . 'inc/markup-extras.php';
+require_once ASTRA_THEME_DIR . 'inc/extras.php';
+require_once ASTRA_THEME_DIR . 'inc/blog/blog-config.php';
+require_once ASTRA_THEME_DIR . 'inc/blog/blog.php';
+require_once ASTRA_THEME_DIR . 'inc/blog/single-blog.php';
+
+/**
+ * Markup Files
+ */
+require_once ASTRA_THEME_DIR . 'inc/template-parts.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-loop.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-mobile-header.php';
+
+/**
+ * Functions and definitions.
+ */
+require_once ASTRA_THEME_DIR . 'inc/class-astra-after-setup-theme.php';
+
+// Required files.
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-helper.php';
+
+require_once ASTRA_THEME_DIR . 'inc/schema/class-astra-schema.php';
+
+/* Setup API */
+require_once ASTRA_THEME_DIR . 'admin/includes/class-astra-api-init.php';
+
+if ( is_admin() ) {
+	/**
+	 * Admin Menu Settings
+	 */
+	require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-settings.php';
+	require_once ASTRA_THEME_DIR . 'admin/class-astra-admin-loader.php';
+	require_once ASTRA_THEME_DIR . 'inc/lib/astra-notices/class-astra-notices.php';
+}
+
+/**
+ * Metabox additions.
+ */
+require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-meta-boxes.php';
+
+require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-meta-box-operations.php';
+
+/**
+ * Customizer additions.
+ */
+require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-customizer.php';
+
+/**
+ * Astra Modules.
+ */
+require_once ASTRA_THEME_DIR . 'inc/modules/posts-structures/class-astra-post-structures.php';
+require_once ASTRA_THEME_DIR . 'inc/modules/related-posts/class-astra-related-posts.php';
+
+/**
+ * Compatibility
+ */
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-gutenberg.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-jetpack.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/woocommerce/class-astra-woocommerce.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/edd/class-astra-edd.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/lifterlms/class-astra-lifterlms.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/learndash/class-astra-learndash.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-beaver-builder.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-bb-ultimate-addon.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-contact-form-7.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-visual-composer.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-site-origin.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-gravity-forms.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-bne-flyout.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-ubermeu.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-divi-builder.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-amp.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-yoast-seo.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/surecart/class-astra-surecart.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-starter-content.php';
+require_once ASTRA_THEME_DIR . 'inc/addons/transparent-header/class-astra-ext-transparent-header.php';
+require_once ASTRA_THEME_DIR . 'inc/addons/breadcrumbs/class-astra-breadcrumbs.php';
+require_once ASTRA_THEME_DIR . 'inc/addons/scroll-to-top/class-astra-scroll-to-top.php';
+require_once ASTRA_THEME_DIR . 'inc/addons/heading-colors/class-astra-heading-colors.php';
+require_once ASTRA_THEME_DIR . 'inc/builder/class-astra-builder-loader.php';
+
+// Elementor Compatibility requires PHP 5.4 for namespaces.
+if ( version_compare( PHP_VERSION, '5.4', '>=' ) ) {
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-elementor.php';
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-elementor-pro.php';
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-web-stories.php';
+}
+
+// Beaver Themer compatibility requires PHP 5.3 for anonymous functions.
+if ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-beaver-themer.php';
+}
+
+require_once ASTRA_THEME_DIR . 'inc/core/markup/class-astra-markup.php';
+
+/**
+ * Load deprecated functions
+ */
+require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
+require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
+require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
+
+// Fungsi untuk membuat halaman login custom
+function custom_login_form() {
+    ob_start();
+    ?>
+    <div class="custom-login-form">
+        <h2>Login to Your Account</h2>
+        <form method="post" action="<?php echo esc_url( site_url('wp-login.php', 'login_post') ); ?>">
+            <label for="username">Username</label>
+            <input type="text" name="log" id="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="pwd" id="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p class="register-link">
+            <a href="<?php echo esc_url( site_url('/register') ); ?>">Belum punya akun? Daftar di sini</a>
+        </p>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+// Shortcode untuk menampilkan form login di halaman
+add_shortcode('custom_login_form', 'custom_login_form');
+
+// Fungsi untuk menampilkan form registrasi
+function custom_registration_form() {
+    if (is_user_logged_in()) {
+        return '<p>You are already logged in.</p>';
+    }
+
+    ob_start();
+    ?>
+    <form method="post" action="">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        
+        <input type="submit" name="register" value="Register">
+    </form>
+    <?php
+
+    // Handle form submission
+    if (isset($_POST['register'])) {
+        $username = sanitize_user($_POST['username']);
+        $email = sanitize_email($_POST['email']);
+        $password = $_POST['password'];
+
+        $errors = new WP_Error();
+
+        // Validasi
+        if (username_exists($username) || email_exists($email)) {
+            $errors->add('username_email', 'Username atau email sudah terdaftar');
+        } elseif (empty($username) || empty($email) || empty($password)) {
+            $errors->add('empty_fields', 'Semua kolom wajib diisi');
+        }
+
+        // Jika tidak ada error, buat pengguna baru
+        if (empty($errors->get_error_messages())) {
+            wp_create_user($username, $password, $email);
+            echo '<p>Registrasi berhasil! Silakan login.</p>';
+        } else {
+            foreach ($errors->get_error_messages() as $error) {
+                echo '<p>' . $error . '</p>';
+            }
+        }
+    }
+
+    return ob_get_clean();
+}
+add_shortcode('custom_registration_form', 'custom_registration_form');
+
+// Fungsi untuk halaman home Swift Tidy Force
+function tsf_homepage_content() {
+    ob_start();
+    ?>
+    <div class="tsf-homepage">
+        <h1 class="tsf-title">Swift Tidy Force</h1>
+        <p class="tsf-description">Swift Tidy Force adalah layanan cleaning service profesional yang memberikan solusi kebersihan terbaik untuk rumah, kantor, dan lingkungan Anda. Dengan tenaga ahli dan peralatan modern, kami siap membantu Anda menciptakan lingkungan yang bersih dan nyaman.</p>
+
+        <h2 class="tsf-services-title">Layanan Kami</h2>
+        <ul class="tsf-services-list">
+            <li>Bathroom Cleaning</li>
+            <li>Kitchen Cleaning</li>
+            <li>Office Cleaning</li>
+            <li>Garden Cleaning</li>
+            <li>Swift Gas Install</li>
+        </ul>
+
+        <h2 class="tsf-contact-title">Kontak Kami</h2>
+        <p class="tsf-contact-info">Untuk informasi lebih lanjut atau layanan lainnya, hubungi kami di:</p>
+        <p class="tsf-contact-details">Email: info@swifttidyforce.com<br>Telepon: +62 812-3456-7890</p>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('tsf_homepage', 'tsf_homepage_content');
+
+// Fungsi untuk halaman About Swift Tidy Force
+function tsf_about_page_content() {
+    ob_start();
+    ?>
+    <div class="tsf-about">
+        <h1 class="tsf-about-title">Tentang Swift Tidy Force</h1>
+        <p class="tsf-about-description">Swift Tidy Force (TSF) adalah perusahaan layanan kebersihan terkemuka yang berkomitmen memberikan solusi kebersihan profesional untuk rumah, kantor, dan lingkungan lainnya. Didirikan dengan misi untuk menciptakan ruang yang bersih dan nyaman, TSF telah berkembang dan dikenal luas sebagai penyedia layanan kebersihan yang handal dengan tim ahli dan peralatan modern.</p>
+
+        <h2 class="tsf-history-title">Sejarah Kami</h2>
+        <p class="tsf-history-description">Swift Tidy Force dibangun dari ide sederhana: menyediakan kebersihan dengan standar terbaik dan layanan yang dapat diandalkan. Dengan dedikasi yang kuat dan dukungan klien kami, perusahaan ini berkembang pesat dan kini melayani berbagai wilayah dengan solusi kebersihan yang lengkap dan terpercaya.</p>
+
+        <h2 class="tsf-contact-title">Kontak Kami</h2>
+        <p class="tsf-contact-info">Anda dapat menghubungi kami melalui:</p>
+        <p class="tsf-contact-details">
+            <strong>Email:</strong> info@swifttidyforce.com<br>
+            <strong>Telepon:</strong> +62 812-3456-7890<br>
+            <strong>Alamat:</strong> Jl. Kebersihan No.1, Sukabumi, Indonesia
+        </p>
+
+        <h2 class="tsf-map-title">Lokasi Kami</h2>
+        <div class="tsf-map">
+            <!-- Google Maps iframe embed -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2799164716!2d-74.2598747!3d40.6976701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7a0cbb3bfbefc565!2sGoogle!5e0!3m2!1sen!2sus!4v1594014053716!5m2!1sen!2sus" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('tsf_about_page', 'tsf_about_page_content');
+
+
+// Fungsi untuk halaman Services Swift Tidy Force
+function tsf_services_page_content() {
+    ob_start();
+    ?>
+    <div class="tsf-services">
+        <h1 class="tsf-services-title">Layanan Kami</h1>
+        <p class="tsf-services-intro">Swift Tidy Force menawarkan berbagai layanan kebersihan profesional yang siap membantu Anda menjaga kebersihan dan kenyamanan lingkungan. Berikut adalah layanan unggulan kami:</p>
+
+        <!-- Daftar Layanan -->
+        <div class="tsf-service-item">
+            <h2 class="service-name">Bathroom Cleaning</h2>
+            <p class="service-description">Membersihkan kamar mandi dengan peralatan dan bahan pembersih profesional untuk memastikan kebersihan dan kenyamanan.</p>
+            <p class="service-price">Harga: Rp 150,000</p>
+            <a href="https://wa.me/6288210553939?text=Halo%20Swift%20Tidy%20Force,%20saya%20ingin%20memesan%20Bathroom%20Cleaning." class="service-button">Pesan Sekarang</a>
+        </div>
+
+        <div class="tsf-service-item">
+            <h2 class="service-name">Kitchen Cleaning</h2>
+            <p class="service-description">Membersihkan dapur secara menyeluruh, mencakup meja, kompor, dan area lainnya untuk memastikan kebersihan maksimal.</p>
+            <p class="service-price">Harga: Rp 200,000</p>
+            <a href="https://wa.me/6288210553939?text=Halo%20Swift%20Tidy%20Force,%20saya%20ingin%20memesan%20Kitchen%20Cleaning." class="service-button">Pesan Sekarang</a>
+        </div>
+
+        <div class="tsf-service-item">
+            <h2 class="service-name">Office Cleaning</h2>
+            <p class="service-description">Menyediakan layanan kebersihan profesional untuk kantor, mencakup meja kerja, ruang rapat, dan area lainnya.</p>
+            <p class="service-price">Harga: Rp 300,000</p>
+            <a href="https://wa.me/6288210553939?text=Halo%20Swift%20Tidy%20Force,%20saya%20ingin%20memesan%20Office%20Cleaning." class="service-button">Pesan Sekarang</a>
+        </div>
+
+        <div class="tsf-service-item">
+            <h2 class="service-name">Garden Cleaning</h2>
+            <p class="service-description">Layanan kebersihan taman untuk memastikan lingkungan luar Anda tetap bersih, teratur, dan nyaman.</p>
+            <p class="service-price">Harga: Rp 250,000</p>
+            <a href="https://wa.me/6288210553939?text=Halo%20Swift%20Tidy%20Force,%20saya%20ingin%20memesan%20Garden%20Cleaning." class="service-button">Pesan Sekarang</a>
+        </div>
+
+        <div class="tsf-service-item">
+            <h2 class="service-name">Swift Gas Install</h2>
+            <p class="service-description">Jasa instalasi gas yang aman dan profesional untuk dapur atau industri kecil Anda.</p>
+            <p class="service-price">Harga: Rp 350,000</p>
+            <a href="https://wa.me/6288210553939?text=Halo%20Swift%20Tidy%20Force,%20saya%20ingin%20memesan%20Swift%20Gas%20Install." class="service-button">Pesan Sekarang</a>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('tsf_services_page', 'tsf_services_page_content');
+
+// Fungsi untuk membuat tombol logout
+function tsf_logout_button_shortcode() {
+    if (is_user_logged_in()) {
+        // Link Logout WordPress, akan redirect ke homepage setelah logout
+        $logout_url = wp_logout_url(home_url());
+        
+        // Output tombol logout
+        return '<a href="' . esc_url($logout_url) . '" class="tsf-logout-button">Logout</a>';
+    }
+    return ''; // Tidak menampilkan apapun jika pengguna belum login
+}
+add_shortcode('tsf_logout_button', 'tsf_logout_button_shortcode');
